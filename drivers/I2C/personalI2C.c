@@ -2,7 +2,7 @@
  * personalI2C.c
  *
  *  Created on: Mar 20, 2018
- *      Author: Sean Link
+ *      Author: Sean Link and Chloe Mena
  *     Purpose: Store the function definitions for the I2C peripheral
  */
 
@@ -23,8 +23,10 @@
 
 // Interrupt Service Routine
 extern void MPUDone(void);
+
 extern void MPU9150I2CIntHandler(void);
 
+// Purpose: Configure the I2C peripheral
 void setupI2C(void) {
     // Turning power on to the peripheral
     SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C3);

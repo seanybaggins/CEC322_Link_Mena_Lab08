@@ -1,10 +1,16 @@
 /*
- * Lab7_I2C.c
+ * Lab8_I2C.c
  *
  * Class: CEC322
  * University: ERAU - Prescott
  * Authors: Sean Link
  * Date: 3/20/2018
+ *
+ * This lab demonstrates the use of I2C communication where the TM4C
+ * micro controller is the master and the MPU is the slave. The MPU
+ * gets accelerometer data which is then sent to the main processor.
+ * This data is used to create the "bubble level" and to display the
+ * information on the board as a floating point number.
  *
  */
 
@@ -53,48 +59,13 @@
 
 
 //****************************************************************************
-// Defines
-//****************************************************************************
-
-//asdl;fjas;dflkjas;dlfkjas;dlfkja;sldkfja;sldkfj;aslkdfj;aslkdjfa;slkdjf;aslkdfja;slkjfda;sldkfj
-
-//****************************************************************************
 // Globals
 //****************************************************************************
-tContext sContext;
+extern tContext sContext;
 extern tI2CMInstance g_sI2CInst;
 extern tMPU9150 g_sMPU9150Inst;
 extern bool globalMpuDone;
 uint8_t menuSelection = '\0';
-
-//****************************************************************************
-// Interrupts
-//****************************************************************************
-
-
-void oneSecondTimer(void) {
-    TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
-    static uint32_t timerCount = 0;
-    //clearBlack();
-
-    timerCount++;
-    //displayInfoOnBoard("%d", timerCount, 25, DISPLAY_NUMBER);
-}
-
-void IntUART0(void) {
-    uint32_t ui32Status;
-
-    // Get the interrupt status.
-    ui32Status = UARTIntStatus(UART0_BASE, true);
-
-    // Clear the asserted interrupts.
-    UARTIntClear(UART0_BASE, ui32Status);
-
-    // Get the character from the UART buffer
-    while(UARTCharsAvail(UART0_BASE)) {
-        menuSelection = tolower((uint8_t)UARTCharGetNonBlocking(UART0_BASE));
-    }
-}
 
 //****************************************************************************
 // Main function
@@ -135,7 +106,7 @@ main(void)
 
     IntMasterEnable();
 
-    // I2C must be set up before the MPU
+    // I2C must be set up before the MPU and Interrupts must be enabled
     setupMPU();
 
     //************************************************************************
@@ -143,6 +114,7 @@ main(void)
     //************************************************************************
     uint32_t blinkingLightCounter = 0;
     bool exitProgram = false;
+    DisplayMode displayMode = DISPLAY_CIRCLE;
 
     //************************************************************************
     // starting functional calls and main while loop
@@ -152,11 +124,6 @@ main(void)
 
     // Displaying UART Menu
     printMainMenu();
-
-    //************************************************************************
-    // Local Variables
-    //************************************************************************
-    DisplayMode displayMode = DISPLAY_CIRCLE;
 
     //************************************************************************
     // Main while loop
@@ -193,6 +160,9 @@ main(void)
         }
         menuSelection = '\0';
 
+        // Should the MPU be done collecting data, the data will be displayed
+        // to the OLED. Whether the information is displayed as the bubble
+        // or a floating point number is dependent on the menu selection
         switch(globalMpuDone) {
             case true:{
                 static float accelerometerData[3];
@@ -217,7 +187,6 @@ main(void)
                     // Note: multiplying by -1 and switching the x and y values
                     // Converts the coordinate system defined on the gyroscope
                     // to the coordinate system defined on the OLED
-                    //displayInfoOnBoard("Sean", -1, 10, DISPLAY_NUMBER);
                     displayInfoOnBoard((uint8_t *)floatToString((-1)*accelerometerData[1]), -1, 25, DISPLAY_NUMBER);
                     displayInfoOnBoard((uint8_t *)floatToString((-1)*accelerometerData[0]), -1, 50, DISPLAY_NUMBER);
                 }

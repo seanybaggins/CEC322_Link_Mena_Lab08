@@ -6,10 +6,10 @@
  *     Purpose: Store the function definitions specific to the MPU
  */
 
-// Includes must be revisited a;sldkfja;slkdjf;aslkdjf;alskjd;lfajdskljf;lasjdf;
-#include <stdint.h>
+
 #include <stdbool.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "personalMpu.h"
 
@@ -27,6 +27,7 @@
 #include "sensorlib/ak8975.h"
 #include "sensorlib/mpu9150.h"
 
+// Globals
 bool globalMpuDone = false;
 tI2CMInstance g_sI2CInst;
 tMPU9150 g_sMPU9150Inst;
@@ -59,7 +60,8 @@ void MPU9150I2CIntHandler(void) {
     I2CMIntHandler(&g_sI2CInst);
 }
 
-// Dependency: I2C Peripheral must be configured first
+// Purpose: Undergo configuration of the MPU
+// Dependency: I2C Peripheral must be configured and interrupts must be enabled
 void setupMPU(void) {
 
     // Initialize I2C3 instance associated with I2C3

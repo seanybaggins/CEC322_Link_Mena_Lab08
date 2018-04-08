@@ -1,10 +1,10 @@
 # FIXED
 
 drivers/MPU/personalMpu.obj: ../drivers/MPU/personalMpu.c
-drivers/MPU/personalMpu.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/stdint.h
 drivers/MPU/personalMpu.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/stdbool.h
 drivers/MPU/personalMpu.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/string.h
 drivers/MPU/personalMpu.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/linkage.h
+drivers/MPU/personalMpu.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/stdint.h
 drivers/MPU/personalMpu.obj: ../drivers/MPU/personalMpu.h
 drivers/MPU/personalMpu.obj: C:/ti/TivaWare_C_Series-2.1.3.156/driverlib/interrupt.h
 drivers/MPU/personalMpu.obj: C:/ti/TivaWare_C_Series-2.1.3.156/inc/hw_memmap.h
@@ -20,10 +20,10 @@ drivers/MPU/personalMpu.obj: C:/ti/TivaWare_C_Series-2.1.3.156/sensorlib/ak8975.
 drivers/MPU/personalMpu.obj: C:/ti/TivaWare_C_Series-2.1.3.156/sensorlib/mpu9150.h
 
 ../drivers/MPU/personalMpu.c: 
-C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/stdint.h: 
 C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/stdbool.h: 
 C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/string.h: 
 C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/linkage.h: 
+C:/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include/stdint.h: 
 ../drivers/MPU/personalMpu.h: 
 C:/ti/TivaWare_C_Series-2.1.3.156/driverlib/interrupt.h: 
 C:/ti/TivaWare_C_Series-2.1.3.156/inc/hw_memmap.h: 

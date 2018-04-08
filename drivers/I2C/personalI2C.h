@@ -2,7 +2,7 @@
  * personalI2C.h
  *
  *  Created on: Mar 20, 2018
- *      Author: Sean Link
+ *      Author: Sean Link and Chloe Mena
  *     Purpose: Store the definitions and function prototypes for the I2C
  */
 

@@ -18,6 +18,7 @@
 #include "personalUART.h"
 #include "driverlib/gpio.h"
 
+extern uint8_t menuSelection;
 
 void setupUART(void) {
     // Turn on the UART
@@ -66,3 +67,18 @@ void printMainMenu(void) {
                     "Q - Quit Program\n\r");
 }
 
+// Purpose: To receive user inputs when a key is pressed
+void IntUART0(void) {
+    uint32_t ui32Status;
+
+    // Get the interrupt status.
+    ui32Status = UARTIntStatus(UART0_BASE, true);
+
+    // Clear the asserted interrupts.
+    UARTIntClear(UART0_BASE, ui32Status);
+
+    // Get the character from the UART buffer
+    while(UARTCharsAvail(UART0_BASE)) {
+        menuSelection = tolower((uint8_t)UARTCharGetNonBlocking(UART0_BASE));
+    }
+}

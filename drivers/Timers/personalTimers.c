@@ -57,3 +57,10 @@ void setupTimers(void) {
     //************************************************************************
     TimerEnable(TIMER0_BASE, TIMER_A);
 }
+
+void oneSecondTimer(void) {
+    TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+    static uint32_t timerCount = 0;
+
+    timerCount++;
+}

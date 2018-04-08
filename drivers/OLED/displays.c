@@ -13,7 +13,7 @@
 #include "grlib/grlib.h"
 
 
-extern tContext sContext;
+tContext sContext;
 
 // Purpose: Prints a black box over the entire OLED display
 void clearBlack(void){
@@ -85,7 +85,7 @@ void diplaySplashOnOLED(void) {
 
 }
 
-// Purpose: to draw a cross on the center of the board
+// Purpose: To draw a cross on the center of the board
 void drawCrossCenterd(void) {
     // Setting the text to be white
     GrContextForegroundSet(&sContext, ClrWhite);
@@ -104,9 +104,11 @@ void drawCrossCenterd(void) {
 
 // Purpose: To scale data from MPU and draw circle on OLED
 void drawCircle(int32_t xValue, int32_t yValue) {
+    uint32_t xMax = GrContextDpyWidthGet(&sContext);
+    uint32_t yMax = GrContextDpyHeightGet(&sContext);
     //scaling values
-    xValue = (xValue * 96 / 20) + 96/2;
-    yValue = (yValue * 64 / 20) + 64/2;
+    xValue = (xValue * xMax / 20) + xMax/2;
+    yValue = (yValue * yMax / 20) + yMax/2;
     uint32_t radious = 3;
     GrCircleDraw(&sContext, xValue, yValue, radious);
 
