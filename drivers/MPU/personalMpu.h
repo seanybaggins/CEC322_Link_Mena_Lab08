@@ -11,6 +11,7 @@
 #define DRIVERS_MPU_PERSONALMPU_H_
 
 #define MPU9150_I2C_ADDRESS 0x69
+#define MAX_MPU_RANGE_OFFSET_AT_0 20
 
 void setupMPU(void);
 void MPUDone(void);

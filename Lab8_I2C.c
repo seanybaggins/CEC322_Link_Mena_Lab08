@@ -187,8 +187,8 @@ main(void)
                     // Note: multiplying by -1 and switching the x and y values
                     // Converts the coordinate system defined on the gyroscope
                     // to the coordinate system defined on the OLED
-                    displayInfoOnBoard((uint8_t *)floatToString((-1)*accelerometerData[1]), -1, 25, DISPLAY_NUMBER);
-                    displayInfoOnBoard((uint8_t *)floatToString((-1)*accelerometerData[0]), -1, 50, DISPLAY_NUMBER);
+                    displayInfoOnBoard((uint8_t *)floatToString(accelerometerData[1]), -1, 25, DISPLAY_NUMBER);
+                    displayInfoOnBoard((uint8_t *)floatToString(accelerometerData[0]), -1, 50, DISPLAY_NUMBER);
                 }
 
                 IntMasterEnable();

@@ -11,7 +11,7 @@
 
 #include "displays.h"
 #include "grlib/grlib.h"
-
+#include "../MPU/personalMpu.h"
 
 tContext sContext;
 
@@ -104,11 +104,11 @@ void drawCrossCenterd(void) {
 
 // Purpose: To scale data from MPU and draw circle on OLED
 void drawCircle(int32_t xValue, int32_t yValue) {
-    uint32_t xMax = GrContextDpyWidthGet(&sContext);
-    uint32_t yMax = GrContextDpyHeightGet(&sContext);
     //scaling values
-    xValue = (xValue * xMax / 20) + xMax/2;
-    yValue = (yValue * yMax / 20) + yMax/2;
+    xValue = (xValue * MAX_SCREEN_WIDTH / MAX_MPU_RANGE_OFFSET_AT_0)
+            + MAX_SCREEN_WIDTH / 2;
+    yValue = (yValue * MAX_SCREEN_HEIGHT / MAX_MPU_RANGE_OFFSET_AT_0)
+            + MAX_SCREEN_HEIGHT / 2;
     uint32_t radious = 3;
     GrCircleDraw(&sContext, xValue, yValue, radious);
 
